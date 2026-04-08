@@ -6,6 +6,7 @@ services:
   db:
     build: ./database  
     environment:
+      - POSTGRES_USER=${DB_USER}
       - POSTGRES_PASSWORD=${DB_PASSWORD}
       - POSTGRES_DB=${DB_NAME}
     volumes:
