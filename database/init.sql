@@ -1,4 +1,7 @@
-CREATE TABLE TICKER (
+CREATE SCHEMA IF NOT EXISTS raw;
+CREATE SCHEMA IF NOT EXISTS clean;
+
+CREATE TABLE raw.TICKER (
     ticker_name VARCHAR(255),
     unix_time INT,
     high FLOAT,
