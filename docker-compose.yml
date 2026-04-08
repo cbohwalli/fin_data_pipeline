@@ -1,0 +1,17 @@
+
+#todo: förstå hur man sätter upp en docker-compose.yml och hur man designar och skiljer från vanlig docker fil
+version: '3.8'
+
+services:
+  db:
+    build: ./database  
+    environment:
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+volumes:
+  pgdata: 
