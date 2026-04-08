@@ -3,7 +3,7 @@ CREATE SCHEMA IF NOT EXISTS clean;
 
 CREATE TABLE raw.TICKER (
     ticker_name VARCHAR(255),
-    unix_time INT,
+    unix_time BIGINT,
     high FLOAT,
     low FLOAT,
     start_time FLOAT,
