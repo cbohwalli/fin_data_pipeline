@@ -1,12 +1,9 @@
 CREATE SCHEMA IF NOT EXISTS raw;
 CREATE SCHEMA IF NOT EXISTS clean;
 
-CREATE TABLE raw.TICKER (
-    ticker_name VARCHAR(255),
-    unix_time BIGINT,
-    high FLOAT,
-    low FLOAT,
-    start_time FLOAT,
-    close_time FLOAT,
-    PRIMARY KEY (ticker_name, unix_time)
+CREATE TABLE raw.RAW_TICKER_DATA (
+    ticker_symbol VARCHAR(255),
+    received_at timestamp,
+    json_payload jsonb,
+    PRIMARY KEY (ticker_symbol, received_at)
 );
