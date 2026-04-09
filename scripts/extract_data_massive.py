@@ -3,6 +3,7 @@ import requests
 import psycopg2
 from dotenv import load_dotenv
 from datetime import datetime, timedelta
+from psycopg2.extras import Json 
 
 # --- Configuration & Environment ---
 # Load environment variables from a .env file
@@ -34,6 +35,8 @@ def get_stock_data():
     conn = psycopg2.connect(DB_URL)
     cur = conn.cursor()
     
+    received_at = datetime.now()
+
     for ticker in TICKERS:
         print(f"Fetch data for: {ticker}...")
 
@@ -46,16 +49,14 @@ def get_stock_data():
         
         # Check if the API returned valid results
         if "results" in data:
-            for day in data["results"]:
-                # Mapping API response fields:
-                # t = timestamp (Unix), h = high, l = low, o = open, c = close
-                cur.execute("""
-                    INSERT INTO raw.TICKER (ticker_name, unix_time, high, low, start_time, close_time)
-                    VALUES (%s, %s, %s, %s, %s, %s)
-                    ON CONFLICT (ticker_name, unix_time) DO NOTHING;
-                """, (ticker, day['t'], day['h'], day['l'], day['o'], day['c']))
+
+            # We insert the ticker and the whole JSON response
+            cur.execute("""
+                INSERT INTO raw.TICKER_DATA (ticker_symbol, received_at, json_payload)
+                VALUES (%s, %s, %s)
+                ON CONFLICT (ticker_symbol, received_at) DO NOTHING;
+            """, (ticker, received_at, Json(data)))
             
-            # Commit changes for each ticker to ensure data is saved
             conn.commit()
             print(f"done for {ticker}!")
         else:
