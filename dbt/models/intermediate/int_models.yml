@@ -34,6 +34,10 @@ models:
 
       - name: high_price
         description: "The highest price reached during the trading day."
+        tests:
+          - not_null
 
       - name: low_price
         description: "The lowest price reached during the trading day."
+        tests:
+          - not_null
