@@ -1,7 +1,7 @@
 {{ config(materialized='view') }}
 
 with source as (
-    select * from {{ source('polygon_api', 'TICKER_DATA') }}
+    select * from {{ source('polygon_api', 'ticker_data') }}
 )
 
 select

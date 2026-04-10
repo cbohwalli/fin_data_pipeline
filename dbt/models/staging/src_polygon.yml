@@ -4,7 +4,7 @@ sources:
   - name: polygon_api           
     schema: raw                 
     tables:
-      - name: TICKER_DATA
+      - name: ticker_data
         description: "Raw JSON stock data dumped from Polygon.io (massive)"
         columns:
           - name: ticker_symbol
@@ -13,3 +13,15 @@ sources:
           - name: received_at
             tests:
               - not_null
+
+models:                 
+  - name: stg_stock_data
+    description: "The cleaned staging view for stock data"
+    columns:
+      - name: ticker
+        tests:
+          - not_null
+          - unique      # <--- New Test: Ensures no duplicate rows were created
+      - name: raw_json
+        tests:
+          - not_null
