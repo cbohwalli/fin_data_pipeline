@@ -14,4 +14,4 @@ clean-targets:
 
 models:
   stock_analyzer:
-    materialized: table
+    materialized: view
