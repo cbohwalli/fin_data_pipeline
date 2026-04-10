@@ -9,7 +9,7 @@ select
     ticker_symbol as ticker,
 
     -- 2. Timestamps
-    received_at as loaded_at,
+    received_at as extraction_timestamp,
 
     -- 3. Data Blobs
     json_payload as raw_json

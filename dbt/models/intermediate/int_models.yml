@@ -1,0 +1,39 @@
+version: 2
+
+models:
+  - name: int_stock_data_unpacked
+    description: "Extracts prices and volume from the JSON blob in staging. Converts text values into decimals and maps company names."
+    columns:
+      - name: ticker
+        description: "The stock ticker symbol (e.g., AAPL)."
+        tests:
+          - not_null
+
+      - name: company_name
+        description: "The full name of the company, mapped from the ticker symbol."
+        tests:
+          - not_null
+
+      - name: trading_date
+        description: "The date of the stock trade, converted from Unix milliseconds."
+        tests:
+          - not_null
+
+      - name: extraction_timestamp
+        description: "The timestamp when the data was extracted from the API."
+
+      - name: open_price
+        description: "The opening price for the stock."
+        tests:
+          - not_null
+
+      - name: close_price
+        description: "The closing price for the stock."
+        tests:
+          - not_null
+
+      - name: high_price
+        description: "The highest price reached during the trading day."
+
+      - name: low_price
+        description: "The lowest price reached during the trading day."
