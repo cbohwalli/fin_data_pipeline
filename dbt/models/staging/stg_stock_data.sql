@@ -1,0 +1,17 @@
+{{ config(materialized='view') }}
+
+with source as (
+    select * from {{ source('polygon_api', 'TICKER_DATA') }}
+)
+
+select
+    -- 1. Identity
+    ticker_symbol as ticker,
+
+    -- 2. Timestamps
+    received_at as loaded_at,
+
+    -- 3. Data Blobs
+    json_payload as raw_json
+
+from source

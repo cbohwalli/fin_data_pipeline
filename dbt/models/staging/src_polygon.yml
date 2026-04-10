@@ -1,0 +1,15 @@
+version: 2
+
+sources:
+  - name: polygon_api           
+    schema: raw                 
+    tables:
+      - name: TICKER_DATA
+        description: "Raw JSON stock data dumped from Polygon.io (massive)"
+        columns:
+          - name: ticker_symbol
+            tests:
+              - not_null        
+          - name: received_at
+            tests:
+              - not_null
