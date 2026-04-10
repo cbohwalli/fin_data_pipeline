@@ -1,0 +1,17 @@
+name: 'stock_analyzer'
+version: '1.0.0'
+config-version: 2
+
+profile: 'my_stock_project' 
+
+model-paths: ["models"]
+test-paths: ["tests"]
+target-path: "target"
+clean-targets:
+  - "target"
+  - "dbt_packages"
+  - "logs"
+
+models:
+  stock_analyzer:
+    materialized: view

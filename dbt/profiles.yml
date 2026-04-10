@@ -1,0 +1,12 @@
+my_stock_project: 
+  target: dev     
+  outputs:
+    dev:
+      type: postgres
+      host: db                   
+      user: "{{ env_var('DB_USER') }}"
+      pass: "{{ env_var('DB_PASSWORD') }}"
+      port: 5432
+      dbname: "{{ env_var('DB_NAME') }}"
+      schema: clean
+      threads: 4                     

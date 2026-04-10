@@ -1,0 +1,46 @@
+version: 2
+
+models:
+  - name: fct_stock_performance
+    description: "Final fact table containing daily prices and 7-day Simple Moving Averages (SMA) for all tracked tickers."
+    
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - ticker
+            - trading_date
+    
+    columns:
+      - name: ticker
+        description: "The stock ticker symbol (e.g., AAPL)."
+        tests:
+          - not_null
+
+      - name: trading_date
+        description: "The date of the trading day."
+        tests:
+          - not_null
+
+      # --- SMA 7 CLOSE ---
+      - name: sma_7_close
+        description: "7-day Simple Moving Average for the closing price."
+        tests:
+          - not_null
+  
+      # --- SMA 7 OPEN ---
+      - name: sma_7_open
+        description: "7-day Simple Moving Average for the opening price."
+        tests:
+          - not_null
+
+      # --- SMA 7 HIGH ---
+      - name: sma_7_high
+        description: "7-day Simple Moving Average for the daily high price."
+        tests:
+          - not_null
+
+      # --- SMA 7 LOW ---
+      - name: sma_7_low
+        description: "7-day Simple Moving Average for the daily low price."
+        tests:
+          - not_null
