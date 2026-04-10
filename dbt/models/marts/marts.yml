@@ -3,6 +3,13 @@ version: 2
 models:
   - name: fct_stock_performance
     description: "Final fact table containing daily prices and 7-day Simple Moving Averages (SMA) for all tracked tickers."
+    
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - ticker
+            - trading_date
+    
     columns:
       - name: ticker
         description: "The stock ticker symbol (e.g., AAPL)."
